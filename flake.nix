@@ -2,7 +2,7 @@
   description = "Contributed scripts/pkgs to use Workrave in taskbar apps (e.g. Waybar)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";   
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-utils.url = "flake-utils";
   };
 
