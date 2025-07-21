@@ -1,0 +1,25 @@
+--- workrave_break_info/workrave_break_info.py	2025-07-06 20:56:18.969463149 -0400
++++ workrave_break_info.new/workrave_break_info.py	2025-07-14 20:29:37.583059749 -0400
+@@ -1,5 +1,22 @@
+ #!/usr/bin/env python3
+ 
++import os
++
++_glib_typelib_path = "@glib_typelib_path@"
++
++# Warning: This does not take escaped colons into account, though to
++# be fair, neither does POSIX in its spec for PATH
++# (https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08_03).
++_gi_typelib_path_list = (os.environ["GI_TYPELIB_PATH"].split(os.pathsep)
++                         if "GI_TYPELIB_PATH" in os.environ
++                         else [])
++
++if _glib_typelib_path not in _gi_typelib_path_list:
++    _gi_typelib_path_list.append(_glib_typelib_path)
++
++if _gi_typelib_path_list:
++    os.environ["GI_TYPELIB_PATH"] = os.pathsep.join(_gi_typelib_path_list)
++
+ from dasbus.connection import SessionMessageBus
+ from collections.abc import Sequence
+ from collections import namedtuple
